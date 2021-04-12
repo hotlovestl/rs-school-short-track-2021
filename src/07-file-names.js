@@ -13,7 +13,20 @@
  * the output should be ["file", "file(1)", "image", "file(1)(1)", "file(2)"]
  *
  */
-function renameFiles(/* names */) {
+function renameFiles(names) {
+  const arr = names.slice();
+  arr.forEach((element, index) => {
+    if (index !== arr.length - 1) {
+      let count = 0;
+      for (let i = index + 1; i < arr.length; i++) {
+        if (arr[i] === element) {
+          ++count;
+          arr[i] = `${arr[i]}(${count})`;
+        }
+      }
+    }
+  });
+  return arr;
 }
 
 module.exports = renameFiles;
